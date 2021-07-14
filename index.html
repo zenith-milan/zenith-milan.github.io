@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        body{
+            background-image: url(bg.jpg);
+        }
+        .main{
+            text-align: center;
+        }
+        #profileImage{
+            height: 120px;
+            width: 120px;
+        }
+        #lR{
+            background-color: yellow;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="main">
+        <img id="profileImage">
+        <h2 id="fullName"></h2>
+        <p id = "bio"></p>
+        <br>
+        <h2>My projects</h2>
+        <p id ="flR"></p>
+        <p id ="slR"></p>
+        <p id ="tlR"></p>
+       <br><br><br><br><br><br><br><br><br><br><br>
+
+        <footer id ><h5>Copyright &copy; Milan Subedi</h5></footer>
+    </div>
+    
+    <script>
+        fetch("https://api.github.com/users/zenith-milan")
+        .then(response => response.json())
+        .then(function(data){
+            //console.log(data)
+            document.getElementById('profileImage').src = data['avatar_url']
+            document.getElementById('fullName').textContent =data['name']
+            document.getElementById('bio').textContent = data['bio']
+        })
+        fetch("https://api.github.com/users/zenith-milan/repos")
+        .then(response => response.json())
+        .then(function(repos){
+         console.log(repos)
+        document.getElementById('flR').textContent= repos[0].name
+        document.getElementById('slR').textContent= repos[1].name
+        document.getElementById('tlR').textContent= repos[2].name
+        })
+        
+    </script>
+</body>
+</html>
